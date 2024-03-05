@@ -41,6 +41,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.graphics.vector.VectorProperty
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,8 +50,11 @@ class MainActivity : ComponentActivity() {
             BuisnesscardTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
-                    Greeting("Android")
-                }
+                    BackgroundImage()
+
+                    CardName(name = "Alex Aguilar", title = "Full Stack Developer")
+                    CardContact(phone = "604-123-4685", socialMedia = "Github: @AlexAAguila", email = "aaguilar5@my.bcit.ca")                }
+
             }
         }
     }
@@ -83,7 +87,7 @@ Box(modifier = Modifier.padding(top = 50.dp)) {
         Text(
             text = title,
             fontSize = 18.sp,
-            color = Color(0xFFaa96da)
+            color = Color(0xFFaa96da),
         )
     }
 }
@@ -102,25 +106,13 @@ Row(modifier = Modifier.padding(16.dp)) {
 }
 }
 @Composable
-fun SmokeyGradientBackground() {
-    Box(
-        modifier = Modifier
-            .fillMaxWidth()
-            .fillMaxHeight(), // Adjust the height of the "div"
-        contentAlignment = Alignment.Center
-    ) {
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(
-                    brush = Brush.sweepGradient(
-                        colors = listOf(
-                            Color(0xFFC6DA96), // Dark orange
-                            Color(0xFFC6DA96) // Light yellow
-
-                        )
-                    )
-                )
+fun BackgroundImage(modifier: Modifier = Modifier) {
+    val image = painterResource(R.drawable.bacgkround2)
+    Box {
+        Image(
+            painter = image,
+            contentDescription = null,
+            contentScale = ContentScale.Crop
         )
     }
 }
@@ -150,7 +142,7 @@ fun CardContact(phone: String, socialMedia: String, email: String,modifier: Modi
 @Composable
 fun GreetingPreview() {
     BuisnesscardTheme {
-        SmokeyGradientBackground()
+        BackgroundImage()
         CardName(name = "Alex Aguilar", title = "Full Stack Developer")
         CardContact(phone = "604-123-4685", socialMedia = "Github: @AlexAAguila", email = "aaguilar5@my.bcit.ca")
     }
