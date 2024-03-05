@@ -22,8 +22,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
-
-
+import androidx.compose.material.icons.filled.AccountCircle
+import androidx.compose.material.icons.filled.Email
+import androidx.compose.material.icons.filled.Phone
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
