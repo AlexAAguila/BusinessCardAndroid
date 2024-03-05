@@ -17,14 +17,23 @@ import com.example.buisnesscard.ui.theme.BuisnesscardTheme
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AccountCircle
+import androidx.compose.material.icons.filled.Email
+import androidx.compose.material.icons.filled.Phone
+
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
-import androidx.compose.material.icons.filled.AccountCircle
-import androidx.compose.material.icons.filled.Email
-import androidx.compose.material.icons.filled.Phone
+
+import androidx.compose.material3.Divider
+import androidx.compose.material3.Icon
+import androidx.compose.ui.graphics.vector.ImageVector
+
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -72,6 +81,20 @@ Box(modifier = Modifier.padding(top = 16.dp)) {
     }
 }
 }
+
+@Composable
+fun CardContactItem(icon: ImageVector, text: String){
+Row(modifier = Modifier.padding(16.dp)) {
+   Icon(imageVector = icon, contentDescription = null)
+    
+    Text(
+        text = text,
+        fontSize = 20.sp,
+        modifier = Modifier.padding(start = 16.dp)
+    )
+}
+}
+
 @Composable
 fun CardContact(phone: String, socialMedia: String, email: String,modifier: Modifier = Modifier) {
 
@@ -81,30 +104,23 @@ fun CardContact(phone: String, socialMedia: String, email: String,modifier: Modi
             verticalArrangement = Arrangement.Bottom,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Text(
-                text = phone,
-                fontSize = 20.sp,
-                modifier = Modifier.padding(top = 16.dp)
-            )
-            Text(
-                text = socialMedia,
-                fontSize = 20.sp,
-                modifier = Modifier.padding(top = 16.dp)
-            )
-            Text(
-                text = email,
-                fontSize = 20.sp,
-                modifier = Modifier.padding(top = 16.dp)
-            )
+          CardContactItem(icon = Icons.Default.Phone, text = phone)
+            Divider()
+            CardContactItem(icon = Icons.Default.AccountCircle, text = socialMedia)
+            Divider()
+            CardContactItem(icon = Icons.Default.Email, text = email)
+
         }
     }
 }
+
+
 
 @Preview(name = "Business Card Preview", showSystemUi = true)
 @Composable
 fun GreetingPreview() {
     BuisnesscardTheme {
         CardName(name = "Alex Aguilar", title = "Full Stack Developer")
-        CardContact(phone = "604", socialMedia = "link", email = "outlook.com")
+        CardContact(phone = "604-123-4685", socialMedia = "Github: @AlexAAguila", email = "aaguilar5@my.bcit.ca")
     }
 }
