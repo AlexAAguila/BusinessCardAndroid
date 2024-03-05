@@ -15,11 +15,16 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import com.example.buisnesscard.ui.theme.BuisnesscardTheme
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Email
@@ -32,6 +37,9 @@ import androidx.compose.ui.unit.dp
 
 import androidx.compose.material3.Divider
 import androidx.compose.material3.Icon
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 
 class MainActivity : ComponentActivity() {
@@ -59,15 +67,14 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
 @Composable
 fun CardName(name: String, title: String, modifier: Modifier = Modifier) {
     val image = painterResource(id = R.drawable.alexaguilar2)
-Box(modifier = Modifier.padding(top = 16.dp)) {
+Box(modifier = Modifier.padding(top = 50.dp)) {
     Column(
         modifier = modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally)
     {
-        Image(painter = image, contentDescription = "image of Alex")
-
-
+        Image(painter = image, contentDescription = "image of Alex",
+            modifier = Modifier.clip(CircleShape))
         Text(
             text = name,
             fontSize = 36.sp,
@@ -75,8 +82,8 @@ Box(modifier = Modifier.padding(top = 16.dp)) {
         )
         Text(
             text = title,
-            fontSize = 15.sp
-
+            fontSize = 18.sp,
+            color = Color(0xFFaa96da)
         )
     }
 }
@@ -85,7 +92,7 @@ Box(modifier = Modifier.padding(top = 16.dp)) {
 @Composable
 fun CardContactItem(icon: ImageVector, text: String){
 Row(modifier = Modifier.padding(16.dp)) {
-   Icon(imageVector = icon, contentDescription = null)
+   Icon(imageVector = icon, contentDescription = null, tint = Color(0xFFaa96da))
     
     Text(
         text = text,
@@ -94,20 +101,43 @@ Row(modifier = Modifier.padding(16.dp)) {
     )
 }
 }
+@Composable
+fun SmokeyGradientBackground() {
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .fillMaxHeight(), // Adjust the height of the "div"
+        contentAlignment = Alignment.Center
+    ) {
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(
+                    brush = Brush.sweepGradient(
+                        colors = listOf(
+                            Color(0xFFC6DA96), // Dark orange
+                            Color(0xFFC6DA96) // Light yellow
+
+                        )
+                    )
+                )
+        )
+    }
+}
 
 @Composable
 fun CardContact(phone: String, socialMedia: String, email: String,modifier: Modifier = Modifier) {
 
-    Box(modifier = Modifier.padding(top = 16.dp)) {
+    Box(modifier = Modifier.padding(start = 50.dp, end = 50.dp)) {
         Column(
             modifier = modifier.fillMaxSize(),
             verticalArrangement = Arrangement.Bottom,
-            horizontalAlignment = Alignment.CenterHorizontally
+            horizontalAlignment = Alignment.Start
         ) {
           CardContactItem(icon = Icons.Default.Phone, text = phone)
-            Divider()
+            Divider(color = Color.Gray, thickness = 1.dp) // Add a custom divider
             CardContactItem(icon = Icons.Default.AccountCircle, text = socialMedia)
-            Divider()
+            Divider(color = Color.Gray, thickness = 1.dp) // Add a custom divider
             CardContactItem(icon = Icons.Default.Email, text = email)
 
         }
@@ -120,6 +150,7 @@ fun CardContact(phone: String, socialMedia: String, email: String,modifier: Modi
 @Composable
 fun GreetingPreview() {
     BuisnesscardTheme {
+        SmokeyGradientBackground()
         CardName(name = "Alex Aguilar", title = "Full Stack Developer")
         CardContact(phone = "604-123-4685", socialMedia = "Github: @AlexAAguila", email = "aaguilar5@my.bcit.ca")
     }
