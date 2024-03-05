@@ -15,9 +15,13 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import com.example.buisnesscard.ui.theme.BuisnesscardTheme
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.padding
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.unit.dp
 
 
 class MainActivity : ComponentActivity() {
@@ -45,14 +49,19 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
 @Composable
 fun CardName(name: String, title: String, modifier: Modifier = Modifier) {
     val image = painterResource(id = R.drawable.alexaguilar2)
-
-    Column (modifier = modifier) {
+Box(modifier = Modifier.padding(top = 16.dp)) {
+    Column(
+        modifier = modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.Top,
+        horizontalAlignment = Alignment.CenterHorizontally)
+    {
         Image(painter = image, contentDescription = "image of Alex")
 
 
         Text(
             text = name,
-            fontSize = 36.sp
+            fontSize = 36.sp,
+            modifier = Modifier.padding(top = 16.dp)
         )
         Text(
             text = title,
@@ -61,11 +70,32 @@ fun CardName(name: String, title: String, modifier: Modifier = Modifier) {
         )
     }
 }
+}
 @Composable
-fun CardImage(message: String, modifier: Modifier = Modifier){
+fun CardContact(phone: String, socialMedia: String, email: String,modifier: Modifier = Modifier) {
 
-    Box {
-        CardName(name = "Alex Aguilar", title = "Full Stack Developer")
+    Box(modifier = Modifier.padding(top = 16.dp)) {
+        Column(
+            modifier = modifier.fillMaxSize(),
+            verticalArrangement = Arrangement.Bottom,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Text(
+                text = phone,
+                fontSize = 20.sp,
+                modifier = Modifier.padding(top = 16.dp)
+            )
+            Text(
+                text = socialMedia,
+                fontSize = 20.sp,
+                modifier = Modifier.padding(top = 16.dp)
+            )
+            Text(
+                text = email,
+                fontSize = 20.sp,
+                modifier = Modifier.padding(top = 16.dp)
+            )
+        }
     }
 }
 
@@ -73,6 +103,7 @@ fun CardImage(message: String, modifier: Modifier = Modifier){
 @Composable
 fun GreetingPreview() {
     BuisnesscardTheme {
-        CardImage("Alex Aguilar")
+        CardName(name = "Alex Aguilar", title = "Full Stack Developer")
+        CardContact(phone = "604", socialMedia = "link", email = "outlook.com")
     }
 }
